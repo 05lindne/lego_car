@@ -40,7 +40,7 @@ void loop()
 
         switch(results.value){
    
-        	case 0xFF18E7: // remote control button 2
+        	case 0xFF18E7: // remote control button 1
         	// Toggle motor On or Off
         	if(togglestate==0){
         		digitalWrite(ledPin, HIGH);
@@ -58,11 +58,13 @@ void loop()
 					delay(10);
 				}
 				delay(2000);
+				togglestate = 1;
 			}
 			else {
 				digitalWrite(ledPin, LOW);
         		analogWrite(MOTOR, 0);
 				delay(10);
+				togglestate = 0;
         	}
 			break;
 		}
