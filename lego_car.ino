@@ -13,7 +13,9 @@ Created with help of the book "Exploring Arduino"
 // Define sensor pin
 const int RECV_PIN = 4;
 // Motor on digital pin 9
-const int MOTOR = 9;	
+const int MOTOR = 9;
+// Define LED pin for testing purposes	
+const int ledPin = 13;
 
 // Define integer to remember toggle state
 int togglestate = 0;
@@ -28,6 +30,8 @@ void setup()
 	irrecv.enableIRIn();
 	// Set motor pin as output
 	pinMode(MOTOR, OUTPUT);
+	// Set LED pin as Outputs
+	pinMode(ledPin, OUTPUT);
 }
 
 void loop()
@@ -36,9 +40,10 @@ void loop()
 
         switch(results.value){
    
-        	case 0xFF30CF: // remote control button 1
+        	case 0xFF18E7: // remote control button 2
         	// Toggle motor On or Off
         	if(togglestate==0){
+        		digitalWrite(ledPin, HIGH);
 				for(int i = 0; i < 256; i++)
 				{
 					analogWrite(MOTOR, i);
@@ -55,6 +60,7 @@ void loop()
 				delay(2000);
 			}
 			else {
+				digitalWrite(ledPin, LOW);
         		analogWrite(MOTOR, 0);
 				delay(10);
         	}
