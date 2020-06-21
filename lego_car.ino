@@ -44,20 +44,8 @@ void loop()
         	// Toggle motor On or Off
         	if(togglestate==0){
         		digitalWrite(ledPin, HIGH);
-				for(int i = 0; i < 256; i++)
-				{
-					analogWrite(MOTOR, i);
-					delay(10);
-				}
-
-				delay(2000);
-
-				for(int i = 255; i >= 0; i--)
-				{
-					analogWrite(MOTOR, i);
-					delay(10);
-				}
-				delay(2000);
+				analogWrite(MOTOR, 200);
+				delay(10);
 				togglestate = 1;
 			}
 			else {
