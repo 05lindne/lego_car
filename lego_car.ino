@@ -5,6 +5,9 @@ by Sarah Lindner
 created 06/06/2020
 
 Created with help of the book "Exploring Arduino"
+
+Description of Lego motors:
+https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-characteristicspdf
 */
 
 // Include IR Remote Library by Ken Shirriff
