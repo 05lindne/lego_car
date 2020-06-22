@@ -17,6 +17,8 @@ https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-
 const int RECV_PIN = 4;
 // Motor on digital pin 9
 const int MOTOR = 9;
+// Steering motor on digital pin 8
+const int STEER = 8;
 // Define LED pin for testing purposes	
 const int ledPin = 13;
 
@@ -33,6 +35,8 @@ void setup()
 	irrecv.enableIRIn();
 	// Set motor pin as output
 	pinMode(MOTOR, OUTPUT);
+	// Set steering motor pin as output
+	pinMode(STEER, OUTPUT);
 	// Set LED pin as Outputs
 	pinMode(ledPin, OUTPUT);
 }
@@ -57,6 +61,11 @@ void loop()
 				delay(10);
 				togglestate = 0;
         	}
+			break;
+
+			case 0xFF10EF: // remote control button 4
+				analogWrite(STEER, 100);
+				delay(10);
 			break;
 		}
 		irrecv.resume();
