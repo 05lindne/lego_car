@@ -18,7 +18,7 @@ const int RECV_PIN = 4;
 // Motor on digital pin 9
 const int MOTOR = 9;
 // Steering motor on digital pin 8
-const int STEER = 8;
+const int STEER = 7;
 // Define LED pin for testing purposes	
 const int ledPin = 13;
 
@@ -62,10 +62,21 @@ void loop()
 				togglestate = 0;
         	}
 			break;
-
+// marry this code with the Servo example to make motor turn in both directions
 			case 0xFF10EF: // remote control button 4
-				analogWrite(STEER, 100);
-				delay(10);
+				analogWrite(STEER, 200);
+				// digitalWrite(ledPin, HIGH);
+				delay(200);
+				analogWrite(STEER, 0);
+				// digitalWrite(ledPin, LOW);
+			break;
+
+			case 0xFF38C7: // remote control button 6
+				analogWrite(STEER, -200);
+				// digitalWrite(ledPin, HIGH);
+				delay(200);
+				analogWrite(STEER, 0);
+				// digitalWrite(ledPin, LOW);
 			break;
 		}
 		irrecv.resume();
