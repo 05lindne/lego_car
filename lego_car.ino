@@ -18,11 +18,11 @@ https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-
 // Define sensor pin
 const int RECV_PIN = 4;
 // Motor on digital pin 9
-const int MOTOR = 9;
+const int MOTOR = 3;
 // Define LED pin for testing purposes	
 const int ledPin = 13;
 // Define pin for servo signal
-const int servoPin = 10;
+const int servoPin = 9;
 
 // Define integer to remember toggle state
 int togglestate = 0;
@@ -42,9 +42,10 @@ void setup()
 	// Set motor pin as output
 	pinMode(MOTOR, OUTPUT);
 	// Set servo motor pin
-	myServo.attach(servoPin);
 	// Set LED pin as Outputs
 	pinMode(ledPin, OUTPUT);
+// TODO: as soon as I attach the servo, the lego car doesn't work any more
+	// myServo.attach(servoPin);
 
 }
 
@@ -70,15 +71,15 @@ void loop()
 			}
 			break;
 
-			case 0xFF10EF: // remote control button 4
-				myServo.write(45);
-				delay(15);
-			break;
+			// case 0xFF10EF: // remote control button 4
+			// 	myServo.write(45);
+			// 	delay(15);
+			// break;
 
-			case 0xFF5AA5: // remote control button 6
-				myServo.write(135);
-				delay(15);
-			break;
+			// case 0xFF5AA5: // remote control button 6
+			// 	myServo.write(135);
+			// 	delay(15);
+			// break;
 		}
 		irrecv.resume();
 	}
