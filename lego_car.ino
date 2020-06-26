@@ -8,6 +8,13 @@ Created with help of the book "Exploring Arduino"
 
 Description of Lego motors:
 https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-characteristicspdf
+
+!!!Motor, Servo and IR receiver have to be connected to pins with different timers!!!
+    Pins 5 and 6: controlled by Timer0 --> Motor
+    Pins 9 and 10: controlled by Timer1 --> Servo
+    Pins 11 and 3: controlled by Timer2 --> IR receiver
+
+
 */
 
 // Include IR Remote Library by Ken Shirriff
@@ -16,9 +23,9 @@ https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-
 #include <Servo.h>
 
 // Define sensor pin
-const int RECV_PIN = 4;
+const int RECV_PIN = 11;
 // Motor on digital pin 9
-const int MOTOR = 3;
+const int MOTOR = 5;
 // Define LED pin for testing purposes	
 const int ledPin = 13;
 // Define pin for servo signal
@@ -45,13 +52,14 @@ void setup()
 	// Set LED pin as Outputs
 	pinMode(ledPin, OUTPUT);
 // TODO: as soon as I attach the servo, the lego car doesn't work any more
-	// myServo.attach(servoPin);
+	myServo.attach(servoPin);
 
 }
 
 void loop()
 {
 	if (irrecv.decode(&results)){
+		irrecv.resume();
 
 		switch(results.value){
    
@@ -71,17 +79,16 @@ void loop()
 			}
 			break;
 
-			// case 0xFF10EF: // remote control button 4
-			// 	myServo.write(45);
-			// 	delay(15);
-			// break;
+			case 0xFF10EF: // remote control button 4
+				myServo.write(45);
+				delay(15);
+			break;
 
-			// case 0xFF5AA5: // remote control button 6
-			// 	myServo.write(135);
-			// 	delay(15);
-			// break;
+			case 0xFF5AA5: // remote control button 6
+				myServo.write(135);
+				delay(15);
+			break;
 		}
-		irrecv.resume();
 	}
 }
 
