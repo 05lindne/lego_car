@@ -12,13 +12,6 @@ Created with help of:
 
 Description of Lego motors:
 https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-characteristicspdf
-
-!!!Motor, Servo and IR receiver have to be connected to pins with different timers!!!
-    Pins 5 and 6: controlled by Timer0 --> Motor
-    Pins 9 and 10: controlled by Timer1 --> Servo
-    Pins 11 and 3: controlled by Timer2 --> IR receiver
-
-
 */
 
 // Include IR Remote Library by Ken Shirriff
@@ -27,9 +20,9 @@ https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-
 #include <Servo.h>
 
 // Define sensor pin
-const int RECV_PIN = 11;
+const int RECV_PIN = 4;
 // Motor on digital pin 9
-const int MOTOR = 5;
+const int MOTOR = 3;
 // Define LED pin for testing purposes	
 const int ledPin = 13;
 // Define pin for servo signal
@@ -75,8 +68,8 @@ void setup()
 
 void loop()
 {
+
 	if (irrecv.decode(&results)){ // checks if code has been received
-		irrecv.resume();
 
 		switch(results.value){
 
@@ -138,8 +131,8 @@ void loop()
 				}
 
 			break;
-				
 		}
+		irrecv.resume();
 	}
 }
 
