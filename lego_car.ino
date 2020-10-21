@@ -12,6 +12,10 @@ Created with help of:
 
 Description of Lego motors:
 https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-characteristicspdf
+
+
+TODO:
+
 */
 
 // Include IR Remote Library by Ken Shirriff
@@ -110,7 +114,7 @@ void loop()
 
 			break;
 
-			case 0xFFFFFF: // remote control button held down
+			case 0xFFFFFFFF: // remote control button held down
 
 				if(continueTurn == "left"){
 					turnLeft();
