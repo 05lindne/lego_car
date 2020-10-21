@@ -20,9 +20,9 @@ https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-
 #include <Servo.h>
 
 // Define sensor pin
-const int RECV_PIN = 4;
+const int RECV_PIN = 11;
 // Motor on digital pin 9
-const int MOTOR = 3;
+const int MOTOR = 5;
 // Define LED pin for testing purposes	
 const int ledPin = 13;
 // Define pin for servo signal
