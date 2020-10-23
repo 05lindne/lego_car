@@ -23,6 +23,9 @@ TODO:
 
 #include <Servo.h>
 
+// my own library
+#include "dcMotor.h"
+
 // Define sensor pin
 const int RECV_PIN = 11;
 // Motor on digital pin 9
@@ -146,7 +149,6 @@ void turnLeft(){
 	// prevent position above 180
 	if(pos > 180){pos = 180;}
 	myServo.write(pos);
-	// delay(15);
 }
 
 void turnRight(){
@@ -154,6 +156,5 @@ void turnRight(){
 	pos -= 2;
 	// prevent position below 0
 	if(pos < 0){pos = 0;}
-	myServo.write(pos);
-	// delay(15);
+	myServo.write(pos);;
 }
