@@ -15,6 +15,7 @@ https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-
 
 
 TODO:
+- car makes noise but does not move backwards when 9 is pressed
 
 */
 
@@ -63,6 +64,9 @@ void setup()
 	// Start with Servo in Center
 	myServo.write(pos);
 
+	// Set LED pin as Output
+	pinMode(ledPin, OUTPUT);
+
 }
 
 void loop()
@@ -75,9 +79,24 @@ void loop()
 			case 0xFF18E7: // remote control button 2 -> straight ahead
 
 				// // Toggle motor On or Off
-				myDcMotor.switchMotorState();
-
+				myDcMotor.turnOn();
 				continueTurn = "fwd"; // do not turn if button is held
+			
+			break;
+
+			case 0xFF4AB5: // remote control button 8 -> rewind
+
+				// // Toggle motor On or Off
+				myDcMotor.rewind();
+				continueTurn = "rwd"; // do not turn if button is held
+			
+			break;
+
+			case 0xFF38C7: // remote control button 5 -> stop
+
+				// // Toggle motor On or Off
+				myDcMotor.turnOff();
+				continueTurn = "rwd"; // do not turn if button is held
 			
 			break;
 
@@ -107,12 +126,19 @@ void loop()
 				else if (continueTurn == "right"){
 					turnRight();
 				}
-				else if (continueTurn == "fwd"){}
+				else{}
 
 			break;
 		}
 		irrecv.resume();
 	}
+
+	if(myDcMotor.getMotorOn()){
+		digitalWrite(ledPin, HIGH);
+	}else if (!myDcMotor.getMotorOn()){
+		digitalWrite(ledPin, LOW);
+	}
+
 }
 
 void turnLeft(){

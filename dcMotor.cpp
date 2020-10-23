@@ -19,7 +19,17 @@ dcMotor::dcMotor(int pin)
 
 int dcMotor::getPin()
 {
-	return dcMotor::pin;
+	return pin;
+}
+
+int dcMotor::getSpeed()
+{
+	return motorSpeed;
+}
+
+int dcMotor::getMotorOn()
+{
+	return motorOn;
 }
 
 void dcMotor::setPin(int pin)
@@ -46,6 +56,7 @@ void dcMotor::turnOff()
 	motorOn = false;
 }
 
+// Switch between car moving and car standing still, i.e. motor off
 void dcMotor::switchMotorState()
 {
 	if(motorOn){
@@ -54,4 +65,12 @@ void dcMotor::switchMotorState()
 	else if(!motorOn){
 		turnOn();
 	}
+}
+
+// Move car backwards with motorSpeed
+void dcMotor::rewind()
+{
+	analogWrite(pin, -motorSpeed);
+	delay(10);
+	motorOn = true;
 }

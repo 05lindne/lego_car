@@ -13,11 +13,14 @@ class dcMotor
 	public:
 		dcMotor(int pin);
 		int getPin();
+		int getSpeed();
+		int getMotorOn();
 		void setPin(int pin);
 		void setSpeed(int speed);
 		void turnOn();
 		void turnOff();
 		void switchMotorState();
+		void rewind();
 	private:
 		int pin;
 		int motorSpeed;
