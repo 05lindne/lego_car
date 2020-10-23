@@ -28,18 +28,13 @@ TODO:
 
 // Define sensor pin
 const int RECV_PIN = 11;
-// Motor on digital pin 9
-const int MOTOR = 5;
 // Define LED pin for testing purposes	
 const int ledPin = 13;
 // Define pin for servo signal
 const int servoPin = 9;
 
-// Define integer to remember toggle state
-int togglestate = 0;
-
-// Set a speed for the DC (forward) motor
-int motorSpeed = 200;
+// Initialize dcMotor
+dcMotor myDcMotor(5);
 
 // Define variable for servo position
 // Start at 90 degrees (center position)
@@ -61,10 +56,7 @@ void setup()
 	// Enable the IR Receiver
 	irrecv.enableIRIn();
 
-	// Set motor pin as output
-	pinMode(MOTOR, OUTPUT);
-	// Set LED pin as Outputs
-	pinMode(ledPin, OUTPUT);
+	myDcMotor.setSpeed(200);
 
 	// Set servo motor pin
 	myServo.attach(servoPin);
@@ -82,19 +74,9 @@ void loop()
 
 			case 0xFF18E7: // remote control button 2 -> straight ahead
 
-				// Toggle motor On or Off
-				if(togglestate==0){
-					digitalWrite(ledPin, HIGH);
-					analogWrite(MOTOR, motorSpeed);
-					delay(10);
-					togglestate = 1;
-				}
-				else {
-					digitalWrite(ledPin, LOW);
-					analogWrite(MOTOR, 0);
-					delay(10);
-					togglestate = 0;
-				}
+				// // Toggle motor On or Off
+				myDcMotor.switchMotorState();
+
 				continueTurn = "fwd"; // do not turn if button is held
 			
 			break;
@@ -125,17 +107,7 @@ void loop()
 				else if (continueTurn == "right"){
 					turnRight();
 				}
-				else if (continueTurn == "fwd"){
-									// Toggle motor On or Off
-					if(togglestate==1){
-						digitalWrite(ledPin, HIGH);
-						analogWrite(MOTOR, motorSpeed);
-					}
-					else {
-						digitalWrite(ledPin, LOW);
-						analogWrite(MOTOR, 0);
-					}
-				}
+				else if (continueTurn == "fwd"){}
 
 			break;
 		}
