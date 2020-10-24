@@ -40,6 +40,11 @@ int dcMotor::getRewind()
 	return rewind;
 }
 
+int dcMotor::getMotorOff()
+{
+	return motorOff;
+}
+
 void dcMotor::setPin(int pin)
 {
 	this->pin = pin;

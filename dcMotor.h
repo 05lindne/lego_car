@@ -17,6 +17,7 @@ class dcMotor
 		int getSpeed();
 		int getForward();
 		int getRewind();
+		int getMotorOff();
 		void setPin(int pin);
 		void setSpeed(int speed);
 		void fwd();

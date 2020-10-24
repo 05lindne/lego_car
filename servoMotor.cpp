@@ -14,6 +14,8 @@ created 10/24/2020
 
 servoMotor::servoMotor(int pin, int servoPosition)
 {
+	Servo myServo;
+	
 	this->pin = pin;
 	pinMode(pin, OUTPUT);
 
@@ -23,6 +25,10 @@ servoMotor::servoMotor(int pin, int servoPosition)
 	myServo.attach(pin);
 	// Start with Servo in Center
 	myServo.write(servoPosition);
+
+	maxPosition = 180;
+	minPosition = 0;
+	positionIncrement = 2;
 }
 
 int servoMotor::getPin()
