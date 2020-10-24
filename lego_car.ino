@@ -34,9 +34,14 @@ const int RECV_PIN = 11;
 const int ledPin = 13;
 // Define pin for servo signal
 const int servoPin = 9;
+// Define pin for dc motor
+const int dcPin = 5;
 
 // Initialize dcMotor
-dcMotor myDcMotor(5);
+dcMotor myDcMotor(dcPin);
+
+// Initialize servoMotor
+servoMotor myServoMotor(servoPin, 90);
 
 // Define variable for servo position
 // Start at 90 degrees (center position)
@@ -49,8 +54,8 @@ String continueTurn = "";
 IRrecv irrecv(RECV_PIN);
 decode_results results;
 
-// Call constructor for Servo class
-Servo myServo;
+// // Call constructor for Servo class
+// Servo myServo;
 
 
 void setup()
@@ -60,10 +65,12 @@ void setup()
 
 	myDcMotor.setSpeed(200);
 
-	// Set servo motor pin
-	myServo.attach(servoPin);
-	// Start with Servo in Center
-	myServo.write(pos);
+	// // Set servo motor pin
+	// myServo.attach(servoPin);
+	// // Start with Servo in Center
+	// myServo.write(pos);
+
+
 
 	// Set LED pin as Output
 	pinMode(ledPin, OUTPUT);
@@ -106,7 +113,7 @@ void loop()
 
 			case 0xFF10EF: // remote control button 4 -> turn left
 				
-				turnLeft();
+				myServoMotor.turnLeft();
 
 				// prepare variable for the case that button is pressed longer
 				continueTurn = "left"; 
@@ -115,7 +122,7 @@ void loop()
 
 			case 0xFF5AA5: // remote control button 6 -> turn right
 				
-				turnRight();
+				myServoMotor.turnRight();
 
 				// prepare variable for the case that button is pressed longer
 				continueTurn = "right";
@@ -125,10 +132,10 @@ void loop()
 			case 0xFFFFFFFF: // remote control button held down
 
 				if(continueTurn == "left"){
-					turnLeft();
+					myServoMotor.turnLeft();
 				}
 				else if (continueTurn == "right"){
-					turnRight();
+					myServoMotor.turnRight();
 				}
 				else{}
 
@@ -146,18 +153,18 @@ void loop()
 
 }
 
-void turnLeft(){
-	// move left 2 degrees
-	pos += 2;
-	// prevent position above 180
-	if(pos > 180){pos = 180;}
-	myServo.write(pos);
-}
+// void turnLeft(){
+// 	// move left 2 degrees
+// 	pos += 2;
+// 	// prevent position above 180
+// 	if(pos > 180){pos = 180;}
+// 	myServo.write(pos);
+// }
 
-void turnRight(){
-	// move right 2 degrees
-	pos -= 2;
-	// prevent position below 0
-	if(pos < 0){pos = 0;}
-	myServo.write(pos);;
-}
+// void turnRight(){
+// 	// move right 2 degrees
+// 	pos -= 2;
+// 	// prevent position below 0
+// 	if(pos < 0){pos = 0;}
+// 	myServo.write(pos);;
+// }
