@@ -1,5 +1,6 @@
 /*
-dcMotor.cpp Source Code for library to control a DC motor.
+dcMotor.cpp 
+Source Code for library to control a DC motor built into a car bot.
 by Sarah Lindner
 created 10/23/2020
 
@@ -14,7 +15,9 @@ dcMotor::dcMotor(int pin)
 	pinMode(pin, OUTPUT);
 
 	motorSpeed = 0;
-	motorOn = false;
+	motorOff = true;
+	forward = false;
+	rewind = false;
 }
 
 int dcMotor::getPin()
@@ -27,9 +30,14 @@ int dcMotor::getSpeed()
 	return motorSpeed;
 }
 
-int dcMotor::getMotorOn()
+int dcMotor::getForward()
 {
-	return motorOn;
+	return forward;
+}
+
+int dcMotor::getRewind()
+{
+	return rewind;
 }
 
 void dcMotor::setPin(int pin)
@@ -42,35 +50,41 @@ void dcMotor::setSpeed(int speed)
 	motorSpeed = speed;
 }
 
-void dcMotor::turnOn()
+void dcMotor::fwd()
 {
 	analogWrite(pin, motorSpeed);
 	delay(10);
-	motorOn = true;
+	forward = true;
 }
 
 void dcMotor::turnOff()
 {
 	analogWrite(pin, 0);
 	delay(10);
-	motorOn = false;
+	motorOff = true;
+
 }
 
 // Switch between car moving and car standing still, i.e. motor off
 void dcMotor::switchMotorState()
 {
-	if(motorOn){
-		turnOff();
+	if(motorOff && forward){ // motor is off and was moving forward previously
+		fwd();
+		motorOff = false;
 	}
-	else if(!motorOn){
-		turnOn();
+	else if(motorOff && rewind){ // motor is off and was moving backward previously
+		rwd();
+		motorOff = false;
+	}else if (!motorOff){
+		turnOff();
+		motorOff = true;
 	}
 }
 
 // Move car backwards with motorSpeed
-void dcMotor::rewind()
+void dcMotor::rwd()
 {
 	analogWrite(pin, -motorSpeed);
 	delay(10);
-	motorOn = true;
+	rewind = true;
 }

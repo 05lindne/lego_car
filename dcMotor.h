@@ -1,5 +1,6 @@
 /*
-dcMotor.h Library to control a DC motor.
+dcMotor.h 
+Library to control a DC motor built into a car bot.
 by Sarah Lindner
 created 10/23/2020
 
@@ -14,17 +15,20 @@ class dcMotor
 		dcMotor(int pin);
 		int getPin();
 		int getSpeed();
-		int getMotorOn();
+		int getForward();
+		int getRewind();
 		void setPin(int pin);
 		void setSpeed(int speed);
-		void turnOn();
+		void fwd();
 		void turnOff();
 		void switchMotorState();
-		void rewind();
+		void rwd();
 	private:
 		int pin;
 		int motorSpeed;
-		bool motorOn;
+		bool motorOff;
+		bool forward;
+		bool rewind;
 };
 
 

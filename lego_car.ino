@@ -24,8 +24,9 @@ TODO:
 
 #include <Servo.h>
 
-// my own library
+// my own libraries
 #include "dcMotor.h"
+#include "servoMotor.h"
 
 // Define sensor pin
 const int RECV_PIN = 11;
@@ -79,24 +80,27 @@ void loop()
 			case 0xFF18E7: // remote control button 2 -> straight ahead
 
 				// // Toggle motor On or Off
-				myDcMotor.turnOn();
-				continueTurn = "fwd"; // do not turn if button is held
+				myDcMotor.fwd();
+				continueTurn = "dc"; // do not turn if button is held
 			
 			break;
 
 			case 0xFF4AB5: // remote control button 8 -> rewind
 
 				// // Toggle motor On or Off
-				myDcMotor.rewind();
-				continueTurn = "rwd"; // do not turn if button is held
+				myDcMotor.rwd();
+				continueTurn = "dc"; // do not turn if button is held
 			
 			break;
 
-			case 0xFF38C7: // remote control button 5 -> stop
+			// remote control button 5 
+			// first push: stop
+			// second push: continue as before 
+			case 0xFF38C7: 
 
 				// // Toggle motor On or Off
-				myDcMotor.turnOff();
-				continueTurn = "rwd"; // do not turn if button is held
+				myDcMotor.switchMotorState();
+				continueTurn = "dc"; // do not turn if button is held
 			
 			break;
 
@@ -133,9 +137,10 @@ void loop()
 		irrecv.resume();
 	}
 
-	if(myDcMotor.getMotorOn()){
+	if( myDcMotor.getForward() || myDcMotor.getRewind() ){
 		digitalWrite(ledPin, HIGH);
-	}else if (!myDcMotor.getMotorOn()){
+	}
+	else{
 		digitalWrite(ledPin, LOW);
 	}
 
