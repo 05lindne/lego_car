@@ -60,6 +60,16 @@ void dcMotor::fwd()
 	analogWrite(pin, motorSpeed);
 	delay(10);
 	forward = true;
+	motorOff = false;
+}
+
+// Move car backwards with motorSpeed
+void dcMotor::rwd()
+{
+	analogWrite(pin, -motorSpeed);
+	delay(10);
+	rewind = true;
+	motorOff = false;
 }
 
 void dcMotor::turnOff()
@@ -75,21 +85,10 @@ void dcMotor::switchMotorState()
 {
 	if(motorOff && forward){ // motor is off and was moving forward previously
 		fwd();
-		motorOff = false;
 	}
 	else if(motorOff && rewind){ // motor is off and was moving backward previously
 		rwd();
-		motorOff = false;
 	}else if (!motorOff){
 		turnOff();
-		motorOff = true;
 	}
-}
-
-// Move car backwards with motorSpeed
-void dcMotor::rwd()
-{
-	analogWrite(pin, -motorSpeed);
-	delay(10);
-	rewind = true;
 }

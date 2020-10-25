@@ -16,7 +16,6 @@ https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-
 
 TODO:
 - car makes noise but does not move backwards when 9 is pressed
-- LED does crazy stuff
 - massaging in servoMotor class caused the servo to be sqiggle like crazy
 */
 
