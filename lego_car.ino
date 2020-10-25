@@ -16,6 +16,8 @@ https://www.yumpu.com/de/document/read/51446269/lego-9v-technic-motors-compared-
 
 TODO:
 - car makes noise but does not move backwards when 9 is pressed
+	-> control is wrong 
+	->build H-bridge as explained in "Exploring Arduino"
 - massaging in servoMotor class caused the servo to be sqiggle like crazy
 */
 
@@ -63,7 +65,7 @@ void setup()
 	// Enable the IR Receiver
 	irrecv.enableIRIn();
 
-	myDcMotor.setSpeed(200);
+	myDcMotor.setSpeed(100);
 
 	// // Set servo motor pin
 	// myServo.attach(servoPin);
