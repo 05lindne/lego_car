@@ -78,7 +78,8 @@ void servoMotor::setPin(int pin)
 void servoMotor::setServoPosition(int servoPosition)
 {
 	this->servoPosition = servoPosition;
-	myServo.write(convertDegrees(servoPosition));
+	// myServo.write(convertDegrees(servoPosition));
+	myServo.write(servoPosition);
 }
 
 

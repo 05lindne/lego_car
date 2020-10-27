@@ -18,7 +18,6 @@ TODO:
 - car makes noise but does not move backwards when 9 is pressed
 	-> control is wrong 
 	->build H-bridge as explained in "Exploring Arduino"
-- servo centers only when an ir-remote button is pressed
 */
 
 // Include IR Remote Library by Ken Shirriff
