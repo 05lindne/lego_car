@@ -43,11 +43,11 @@ const int dcPin = 5;
 dcMotor myDcMotor(dcPin);
 
 // Initialize servoMotor
-servoMotor myServoMotor(servoPin, 90);
+servoMotor myServoMotor(servoPin, 980);
 
 // Define variable for servo position
 // Start at 90 degrees (center position)
-int pos = 90;
+// int pos = 90;
 
 // Define Variable to store last code received
 String continueTurn = "";
@@ -83,6 +83,7 @@ void loop()
 {
 
 	if (irrecv.decode(&results)){ // checks if code has been received
+		irrecv.resume();
 
 		switch(results.value){
 
@@ -154,7 +155,6 @@ void loop()
 			digitalWrite(ledPin, HIGH);
 		}
 
-		irrecv.resume();
 	}
 
 }

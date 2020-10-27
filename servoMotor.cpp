@@ -24,7 +24,7 @@ servoMotor::servoMotor(int pin, int servoPosition)
 	// Set servo motor pin
 	myServo.attach(pin);
 	// Start with Servo in Center
-	myServo.write(servoPosition);
+	myServo.write( convertDegrees(servoPosition) );
 
 	maxPosition = 180;
 	minPosition = 0;
@@ -98,8 +98,14 @@ void servoMotor::turnLeft(){
 
 void servoMotor::turnRight(){
 	// move right positionIncrement degrees
-	servoPosition -= positionIncrement;
+	servoPosition -= 10;
+	// servoPosition -= positionIncrement;
 	// prevent servoPositionition below minPosition
 	if(servoPosition < minPosition){servoPosition = minPosition;}
-	myServo.write(servoPosition);;
+	myServo.write(servoPosition);
+}
+
+int servoMotor::convertDegrees(int degrees){
+
+	return map(degrees, 0, 1023, 0, 179);
 }

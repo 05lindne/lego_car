@@ -27,6 +27,7 @@ class servoMotor
 		int setPositionIncrement(int positionIncrement);		
 		void turnLeft();
 		void turnRight();
+		int convertDegrees(int degrees);
 
 	private:
 		int pin;
