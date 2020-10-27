@@ -12,22 +12,10 @@ created 10/24/2020
 
 #include "servoMotor.h"
 
-// servoMotor::servoMotor(int pin, int servoPosition)
-// servoMotor::servoMotor(int pin)
+
 servoMotor::servoMotor()
 {
 	Servo myServo;
-	
-	// this->pin = pin;
-	// pinMode(pin, OUTPUT);
-
-	// this->servoPosition = servoPosition;
-
-	// Set servo motor pin
-	// myServo.attach(pin);
-	// Start with Servo in Center
-	// myServo.write( servoPosition );
-	// myServo.write( convertDegrees(servoPosition) );
 
 	maxPosition = 180;
 	minPosition = 0;
@@ -104,8 +92,7 @@ void servoMotor::turnLeft(){
 
 void servoMotor::turnRight(){
 	// move right positionIncrement degrees
-	servoPosition -= 10;
-	// servoPosition -= positionIncrement;
+	servoPosition -= positionIncrement;
 	// prevent servoPositionition below minPosition
 	if(servoPosition < minPosition){servoPosition = minPosition;}
 	myServo.write(servoPosition);

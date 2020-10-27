@@ -18,7 +18,7 @@ TODO:
 - car makes noise but does not move backwards when 9 is pressed
 	-> control is wrong 
 	->build H-bridge as explained in "Exploring Arduino"
-- massaging in servoMotor class caused the servo to be sqiggle like crazy
+- servo centers only when an ir-remote button is pressed
 */
 
 // Include IR Remote Library by Ken Shirriff
@@ -42,10 +42,7 @@ const int dcPin = 5;
 // Initialize dcMotor
 dcMotor myDcMotor(dcPin);
 
-// // Initialize servoMotor
-// servoMotor myServoMotor(servoPin, 90);
 // Initialize servoMotor
-// servoMotor myServoMotor(servoPin);
 servoMotor myServoMotor;
 
 
@@ -71,15 +68,8 @@ void setup()
 
 	myDcMotor.setSpeed(200);
 
-	// // Set servo motor pin
-	// myServo.attach(servoPin);
-	// // Start with Servo in Center
-	// myServo.write(pos);
-
 	myServoMotor.setServoPosition(90);
 	myServoMotor.setPin(servoPin);
-
-
 
 	// Set LED pin as Output
 	pinMode(ledPin, OUTPUT);

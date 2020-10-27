@@ -15,8 +15,6 @@ created 10/24/2020
 class servoMotor
 {
 	public:
-		// servoMotor(int pin, int servoPosition);
-		// servoMotor(int pin);
 		servoMotor();
 		int getPin();
 		Servo getServo();
