@@ -10,10 +10,14 @@ created 10/24/2020
 #ifndef servoMotor_h
 #define servoMotor_h
 
+#include <Servo.h>
+
 class servoMotor
 {
 	public:
-		servoMotor(int pin, int servoPosition);
+		// servoMotor(int pin, int servoPosition);
+		// servoMotor(int pin);
+		servoMotor();
 		int getPin();
 		Servo getServo();
 		int getMaxPosition();

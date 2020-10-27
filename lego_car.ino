@@ -24,7 +24,7 @@ TODO:
 // Include IR Remote Library by Ken Shirriff
 #include <IRremote.h>
 
-#include <Servo.h>
+// #include <Servo.h>
 
 // my own libraries
 #include "dcMotor.h"
@@ -42,8 +42,12 @@ const int dcPin = 5;
 // Initialize dcMotor
 dcMotor myDcMotor(dcPin);
 
+// // Initialize servoMotor
+// servoMotor myServoMotor(servoPin, 90);
 // Initialize servoMotor
-servoMotor myServoMotor(servoPin, 980);
+// servoMotor myServoMotor(servoPin);
+servoMotor myServoMotor;
+
 
 // Define variable for servo position
 // Start at 90 degrees (center position)
@@ -65,12 +69,15 @@ void setup()
 	// Enable the IR Receiver
 	irrecv.enableIRIn();
 
-	myDcMotor.setSpeed(100);
+	myDcMotor.setSpeed(200);
 
 	// // Set servo motor pin
 	// myServo.attach(servoPin);
 	// // Start with Servo in Center
 	// myServo.write(pos);
+
+	myServoMotor.setServoPosition(90);
+	myServoMotor.setPin(servoPin);
 
 
 
