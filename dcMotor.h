@@ -12,20 +12,23 @@ created 10/23/2020
 class dcMotor
 {
 	public:
-		dcMotor(int pin);
-		int getPin();
+		dcMotor(int EN, int MC1, int MC2);
+		// void initialize(int EM, int MC1, int MC2);
+		// int getPin();
 		int getSpeed();
 		int getForward();
 		int getRewind();
 		int getMotorOff();
-		void setPin(int pin);
+		// void setPin(int pin);
 		void setSpeed(int speed);
 		void fwd();
-		void turnOff();
+		void brake();
 		void switchMotorState();
 		void rwd();
 	private:
-		int pin;
+		int EN;
+		int MC1;
+		int MC2;
 		int motorSpeed;
 		bool motorOff;
 		bool forward;

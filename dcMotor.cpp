@@ -9,10 +9,16 @@ created 10/23/2020
 #include "Arduino.h"
 #include "dcMotor.h"
 
-dcMotor::dcMotor(int pin)
+dcMotor::dcMotor(int EN, int MC1, int MC2)
 {
-	this->pin = pin;
-	pinMode(pin, OUTPUT);
+	this->EN = EN;
+	this->MC1 = MC1;
+	this->MC2 = MC2;
+
+	pinMode(EN, OUTPUT);
+    pinMode(MC1, OUTPUT);
+    pinMode(MC2, OUTPUT);
+    brake(); //Initialize with motor stopped	
 
 	motorSpeed = 0;
 	motorOff = true;
@@ -20,10 +26,22 @@ dcMotor::dcMotor(int pin)
 	rewind = false;
 }
 
-int dcMotor::getPin()
-{
-	return pin;
-}
+// void dcMotor::initialize(int EN, int MC1, int MC2)
+// {
+// 	this->EN = EN;
+// 	this->MC1 = MC1;
+// 	this->MC2 = MC2;
+
+// 	pinMode(EN, OUTPUT);
+//     pinMode(MC1, OUTPUT);
+//     pinMode(MC2, OUTPUT);
+//     brake(); //Initialize with motor stopped
+// }
+
+// int dcMotor::getPin()
+// {
+// 	return pin;
+// }
 
 int dcMotor::getSpeed()
 {
@@ -45,10 +63,10 @@ int dcMotor::getMotorOff()
 	return motorOff;
 }
 
-void dcMotor::setPin(int pin)
-{
-	this->pin = pin;
-}
+// void dcMotor::setPin(int pin)
+// {
+// 	this->pin = pin;
+// }
 
 void dcMotor::setSpeed(int speed)
 {
@@ -57,8 +75,12 @@ void dcMotor::setSpeed(int speed)
 
 void dcMotor::fwd()
 {
-	analogWrite(pin, motorSpeed);
-	delay(10);
+	digitalWrite(EN, LOW);
+    digitalWrite(MC1, HIGH);
+    digitalWrite(MC2, LOW);
+    analogWrite(EN, motorSpeed);
+	// analogWrite(pin, motorSpeed);
+	// delay(10);
 	forward = true;
 	motorOff = false;
 }
@@ -66,16 +88,24 @@ void dcMotor::fwd()
 // Move car backwards with motorSpeed
 void dcMotor::rwd()
 {
-	analogWrite(pin, -motorSpeed);
-	delay(10);
+	digitalWrite(EN, LOW);
+    digitalWrite(MC1, LOW);
+    digitalWrite(MC2, HIGH);
+    analogWrite(EN, motorSpeed);
+	// analogWrite(pin, -motorSpeed);
+	// delay(10);
 	rewind = true;
 	motorOff = false;
 }
 
-void dcMotor::turnOff()
+void dcMotor::brake()
 {
-	analogWrite(pin, 0);
-	delay(10);
+	digitalWrite(EN, LOW);
+    digitalWrite(MC1, LOW);
+    digitalWrite(MC2, LOW);
+    digitalWrite(EN, HIGH);
+	// analogWrite(pin, 0);
+	// delay(10);
 	motorOff = true;
 
 }
@@ -89,6 +119,6 @@ void dcMotor::switchMotorState()
 	else if(motorOff && rewind){ // motor is off and was moving backward previously
 		rwd();
 	}else if (!motorOff){
-		turnOff();
+		brake();
 	}
 }

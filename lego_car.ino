@@ -36,10 +36,14 @@ const int ledPin = 13;
 // Define pin for servo signal
 const int servoPin = 9;
 // Define pin for dc motor
-const int dcPin = 5;
+// const int dcPin = 5;
+const int EN = 6;
+const int MC1 = 3;
+const int MC2 = 2;
 
 // Initialize dcMotor
-dcMotor myDcMotor(dcPin);
+// dcMotor myDcMotor(dcPin);
+dcMotor myDcMotor(EN, MC1, MC2);
 
 // Initialize servoMotor
 servoMotor myServoMotor;
